@@ -11,6 +11,8 @@ import DataFetching from './pages/DataFetching.jsx';
 import CreatePost from './pages/CreatePost.jsx';
 import UpdatePost from './pages/UpdatePost.jsx';
 import DeletePost from './pages/DeletePost.jsx';
+import SalesLineChart from './pages/SalesLineChart.jsx';
+import SalesBarChart from './pages/SalesBarChart.jsx';
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
   {
     path: "/delete-post",
     element: <DeletePost></DeletePost>
+  },
+  {
+    path: "/line-chart",
+    element: <SalesLineChart></SalesLineChart>
+  },
+  {
+    path: "/bar-chart",
+    element: <SalesBarChart></SalesBarChart>
   }
 ]);
 
