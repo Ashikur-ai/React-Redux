@@ -33,6 +33,7 @@ const HomePage = () => {
       </div>
       
       <Link to={"/register"}><button className='btn btn-secondary'>Register</button></Link>
+      <Link to={"/order"}><button className='btn btn-secondary ml-5'>My orders</button></Link>
     </div>
   );
 };
