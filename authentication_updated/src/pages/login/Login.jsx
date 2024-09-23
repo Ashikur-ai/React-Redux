@@ -1,11 +1,14 @@
 import { sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import auth from '../../firebase/firebase.config';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Login = () => {
   const [loginError, setLoginError] = useState('');
   const [success, setSuccess] = useState('');
   const emailRef = useRef(null);
+
+  const { loginUser } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -16,18 +19,28 @@ const Login = () => {
     setLoginError('');
     setSuccess('');
 
-    signInWithEmailAndPassword(auth, email, password)
+    loginUser(email, password)
       .then(result => {
-        console.log(result.user);
-        setSuccess('Login successful');
-      }
-        
-        
-    )
+        console.log(result.user)
+        setSuccess('login successful');
+      })
       .catch(error => {
         console.log(error.message);
         setLoginError(error.message);
     })
+
+    // signInWithEmailAndPassword(auth, email, password)
+    //   .then(result => {
+    //     console.log(result.user);
+    //     setSuccess('Login successful');
+    //   }
+        
+        
+    // )
+    //   .catch(error => {
+    //     console.log(error.message);
+    //     setLoginError(error.message);
+    // })
   }
 
   const handleResetPassword = () => {

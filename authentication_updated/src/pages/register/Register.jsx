@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import auth from '../../firebase/firebase.config';
+import { AuthContext } from '../../provider/AuthProvider';
 
 const Register = () => {
 
@@ -8,6 +9,7 @@ const Register = () => {
   const [success,  setSuccess] = useState('');
 
 
+  const { createUser } = useContext(AuthContext);
   const handleRegister = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -16,17 +18,26 @@ const Register = () => {
     setRegisterError('');
     setSuccess('');
 
-
-    createUserWithEmailAndPassword(auth, email, password)
+    createUser(email, password)
       .then(result => {
-        console.log(result.user);
+        console.log(result.user)
         setSuccess('User created successfully');
-
       })
       .catch(error => {
-        console.log(error)
+        console.log(error.message)
         setRegisterError(error.message);
     })
+
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then(result => {
+    //     console.log(result.user);
+    //     setSuccess('User created successfully');
+
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //     setRegisterError(error.message);
+    // })
   }
   return (
     <div>
